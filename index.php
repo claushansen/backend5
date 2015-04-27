@@ -1,6 +1,6 @@
 <?php 
 include_once('settings.php');
-$page = $_GET['view'];
+$page = isset($_GET['view']) ? $_GET['view'] : '';
 
 switch ($page) {
     case "invoice":

@@ -10,7 +10,7 @@ class Invoice{
 	private $_products;
 	
 	public function __construct(){
-		$this->_id = $_GET['oid'];
+		$this->_id = isset($_GET['oid']) ? $_GET['oid'] : '';
 		if(!$this->_id){
 		die('Need an order id');	
 		}
@@ -23,6 +23,7 @@ class Invoice{
 	
 	private function init(){
 		$orderdata = $this->_db->select('*')->from('orders')->where('id',$this->_id)->execute();
+		if(!$orderdata)die('Wrong orderid, no orders with that id');
 		if($orderdata){
 		$this->_order_date = $orderdata[0]['order_date'];	
 		$this->_user_id = $orderdata[0]['user_id'];
